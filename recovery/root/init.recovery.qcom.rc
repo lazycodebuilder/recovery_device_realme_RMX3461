@@ -1,0 +1,32 @@
+#
+# Copyright (C) 2023-2024 The TeamWin Recovery Project
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
+import /init.recovery.qcom_decrypt.rc
+
+on fs
+    wait /dev/block/platform/soc/${ro.boot.bootdevice}
+    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+    # Load ADSP firmware for PMIC
+    mkdir /firmware
+    mount vfat /dev/block/bootdevice/by-name/modem${ro.boot.slot_suffix} /firmware ro
+
+on property:twrp.modules.loaded=true && property:dev.mnt.blk.firmware=* && property:modem.partition.mounted=1
+    # Load ADSP firmware for PMIC
+    write /sys/kernel/boot_adsp/boot 1
+    wait /sys/class/power_supply/battery
+
+on property:init.svc.fastbootd=running
+    umount /firmware
+
+on boot
+    chmod 0777 /system/bin/postrecoveryboot.sh
+    start postrecoveryboot
+
+service postrecoveryboot /system/bin/postrecoveryboot.sh
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:recovery:s0    
