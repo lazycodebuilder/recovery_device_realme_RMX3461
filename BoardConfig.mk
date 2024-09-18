@@ -67,10 +67,9 @@ BOARD_MOVE_GSI_AVB_KEYS_TO_VENDOR_BOOT := true
 BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE := true
 
 # Kernel modules
-TW_LOAD_VENDOR_MODULES := $(shell echo \"$(shell ls $(DEVICE_PATH)/recovery/root/lib/modules)\")
+TW_LOAD_VENDOR_MODULES := $(shell echo \"$(shell ls $(DEVICE_PATH)/prebuilt/modules)\")
 TW_LOAD_VENDOR_MODULES_EXCLUDE_GKI := true
 TW_LOAD_VENDOR_BOOT_MODULES := true
-TW_LOAD_PREBUILT_MODULES := true
 
 # Partitions Sizes
 BOARD_FLASH_BLOCK_SIZE := 262144
