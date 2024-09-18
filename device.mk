@@ -10,7 +10,8 @@ PRODUCT_SHIPPING_API_LEVEL := $(BOARD_SHIPPING_API_LEVEL)
 # Dynamic partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
-# Virtual A/B
+# A/B
+ENABLE_AB := true
 ENABLE_VIRTUAL_AB := true
 
 # A/B support
