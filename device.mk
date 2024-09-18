@@ -72,6 +72,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.fastbootd.available=true
 
+TARGET_RECOVERY_DEVICE_MODULES += \
+    libion
+
+RECOVERY_LIBRARY_SOURCE_FILES += \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libion.so
+
 # USB
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.3-service-qti
